@@ -1,13 +1,19 @@
 import React from 'react';
-import { Box, Container, Typography, Divider, Paper, Grid } from '@mui/material';
-
+import { Box, Container, Typography, Divider, Paper, Grid, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const About = () => {
+  const navigate = useNavigate();
+
+  const handleContactClick = () => {
+    navigate('/contact');
+  };
+
   return (
     <Box sx={{ py: 8 }}>
       <Container maxWidth="md">
         <Typography variant="h3" gutterBottom align="center">
-          About Us
+          "We Serve You with Our Best"
         </Typography>
 
         {/* Our Story */}
@@ -70,9 +76,6 @@ const About = () => {
               <Typography paragraph>
                 Our team is made up of experienced professionals who are dedicated to providing exceptional service. We work closely with our clients to understand their needs and provide tailored solutions that exceed their expectations.
               </Typography>
-              <Typography variant="h6" sx={{ fontStyle: 'italic', mt: 3 }}>
-                "We Serve You with Our Best"
-              </Typography>
             </Grid>
 
             <Grid item xs={12} md={6}>
@@ -127,11 +130,20 @@ const About = () => {
 
         <Paper
           elevation={3}
-          sx={{ mt: 6, p: 3, bgcolor: 'primary.main', color: 'white' }}
+          sx={{ mt: 6, p: 3, bgcolor: 'primary.main', color: 'white', textAlign: 'center' }}
         >
-          <Typography variant="h6" align="center">
+          <Typography variant="h6" gutterBottom>
             Contact us today to learn how we can support your maintenance and cleaning needs.
           </Typography>
+
+          <Button 
+            variant="contained" 
+            color="secondary" 
+            onClick={handleContactClick}
+            sx={{ mt: 2 }}
+          >
+            Contact Us
+          </Button>
         </Paper>
       </Container>
     </Box>
