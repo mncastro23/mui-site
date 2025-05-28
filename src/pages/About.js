@@ -1,10 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, Divider, Paper, Grid } from '@mui/material';
 
-// Import images from resources folder
-import OurStoryImg from '../resources/our-story.jpg';
-import OurTeamImg from '../resources/our-team.jpg';
-import OurProductsImg from '../resources/our-products.jpg';
 
 const About = () => {
   return (
@@ -43,7 +39,7 @@ const About = () => {
             <Grid item xs={12} md={6}>
               <Box
                 component="img"
-                src={OurStoryImg}
+                src="/resources/our-story.jpg"
                 alt="Our Story"
                 sx={{ width: '100%', borderRadius: 2 }}
               />
@@ -82,7 +78,7 @@ const About = () => {
             <Grid item xs={12} md={6}>
               <Box
                 component="img"
-                src={OurTeamImg}
+                src="/resources/our-team.jpg"
                 alt="Our Team"
                 sx={{ width: '100%', borderRadius: 2 }}
               />
@@ -121,7 +117,7 @@ const About = () => {
             <Grid item xs={12} md={6}>
               <Box
                 component="img"
-                src={OurProductsImg}
+                src="/resources/our-products.jpg"
                 alt="Our Products"
                 sx={{ width: '100%', borderRadius: 2 }}
               />
