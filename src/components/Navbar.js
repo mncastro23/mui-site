@@ -20,7 +20,7 @@ const Navbar = () => {
           <Button component={Link} to="/about" color="inherit">About</Button>
           <Button component={Link} to="/services" color="inherit">Services</Button>
           <Button component={Link} to="/contact" color="inherit">Contact</Button>
-          <Button component={Link} to="/track" color="inherit">Track</Button>
+          <Button component={Link} to="/book" color="inherit">Book Now</Button>
         </Box>
       </Toolbar>
     </AppBar>

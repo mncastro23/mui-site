@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Container,
@@ -7,7 +8,6 @@ import {
   Card,
   CardContent,
   Badge,
-  Paper,
   styled,
 } from '@mui/material';
 
@@ -34,15 +34,18 @@ const RibbonBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const services = [
-  { label: "Handyman Repairs", icon: <HandymanIcon color="primary" sx={{ fontSize: 40 }} /> },
-  { label: "Plumbing Services", icon: <PlumbingIcon color="primary" sx={{ fontSize: 40 }} /> },
-  { label: "Electrical Work", icon: <ElectricBoltIcon color="primary" sx={{ fontSize: 40 }} /> },
-  { label: "HVAC Maintenance", icon: <AcUnitIcon color="primary" sx={{ fontSize: 40 }} /> },
-  { label: "Painting & Carpentry", icon: <BrushIcon color="primary" sx={{ fontSize: 40 }} /> },
-  { label: "Emergency Services", icon: <EmergencyIcon color="primary" sx={{ fontSize: 40 }} /> },
+  { label: 'Handyman Repairs', icon: <HandymanIcon color="primary" sx={{ fontSize: 40 }} /> },
+  { label: 'Plumbing Services', icon: <PlumbingIcon color="primary" sx={{ fontSize: 40 }} /> },
+  { label: 'Electrical Work', icon: <ElectricBoltIcon color="primary" sx={{ fontSize: 40 }} /> },
+  { label: 'HVAC Maintenance', icon: <AcUnitIcon color="primary" sx={{ fontSize: 40 }} /> },
+  { label: 'Painting & Carpentry', icon: <BrushIcon color="primary" sx={{ fontSize: 40 }} /> },
+  { label: 'Emergency Services', icon: <EmergencyIcon color="primary" sx={{ fontSize: 40 }} /> },
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
   return (
     <Box>
       {/* Hero Section */}
@@ -54,10 +57,10 @@ const Home = () => {
           <Typography variant="h6" gutterBottom>
             Quality repairs and upkeep for homes and businesses
           </Typography>
-          <Button variant="contained" color="secondary" sx={{ mt: 3, mr: 2 }}>
-            Get a Free Quote
+          <Button variant="contained" color="secondary" sx={{ mt: 3, mr: 2 }} onClick={() => navigate('/book')}>
+            Book Now
           </Button>
-          <Button variant="outlined" color="inherit" sx={{ mt: 3 }}>
+          <Button variant="outlined" color="inherit" sx={{ mt: 3 }} onClick={() => navigate('/contact')}>
             Contact Us
           </Button>
         </Container>
@@ -70,6 +73,8 @@ const Home = () => {
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 4, mt: 4 }}>
           {services.map(({ label, icon }, index) => {
+            const isHovered = hoveredIndex === index;
+
             const cardContent = (
               <CardContent sx={{ textAlign: 'center' }}>
                 <Box sx={{ mb: 1 }}>{icon}</Box>
@@ -79,23 +84,34 @@ const Home = () => {
                 <Typography variant="body2" color="text.secondary">
                   Reliable technicians. Guaranteed results.
                 </Typography>
+                {isHovered && (
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    sx={{ mt: 2 }}
+                    onClick={() => navigate('/book')}
+                  >
+                    Book Now
+                  </Button>
+                )}
               </CardContent>
             );
 
             return (
               <Card
-        key={index}
-        elevation={3}
-        sx={{
-          width: 280,
-          position: 'relative', // Important for badge absolute positioning
-          '&:hover': {
-            boxShadow: 8,
-            transform: 'scale(1.03)',
-            transition: '0.3s',
-          },
-        }}
-      >
+                key={index}
+                elevation={3}
+                sx={{
+                  width: 280,
+                  position: 'relative',
+                  transition: '0.3s',
+                  transform: isHovered ? 'scale(1.03)' : 'scale(1)',
+                  boxShadow: isHovered ? 8 : 2,
+                }}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
                 {index === 0 ? (
                   <RibbonBadge badgeContent="Popular" overlap="rectangular">
                     {cardContent}
@@ -129,18 +145,11 @@ const Home = () => {
           <Typography variant="h5" gutterBottom>
             Ready to Schedule Your Service?
           </Typography>
-          <Button variant="contained" color="secondary" size="large">
+          <Button variant="contained" color="secondary" size="large" onClick={() => navigate('/book')}>
             Book an Appointment
           </Button>
         </Container>
       </Box>
-
-      {/* Footer */}
-      <Paper elevation={0} sx={{ py: 3, textAlign: 'center', bgcolor: '#eee' }}>
-        <Typography variant="body2">
-          © {new Date().getFullYear()} PHILKAB TECHNICAL SERVICES L.L.C. All rights reserved.
-        </Typography>
-      </Paper>
     </Box>
   );
 };
