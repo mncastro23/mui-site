@@ -138,7 +138,7 @@ const Home = () => {
       {/* Footer */}
       <Paper elevation={0} sx={{ py: 3, textAlign: 'center', bgcolor: '#eee' }}>
         <Typography variant="body2">
-          © {new Date().getFullYear()} Maintenance Services Co. All rights reserved.
+          © {new Date().getFullYear()} PHILKAB TECHNICAL SERVICES L.L.C. All rights reserved.
         </Typography>
       </Paper>
     </Box>
